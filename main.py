@@ -26,14 +26,14 @@
 #         large_word = k
 # print large_word,large_num
 # ---------------------------
-import BeautifulSoup
-import requests
-url = raw_input('enter your url:')
-fhand = requests.get(url)
-soup =BeautifulSoup.BeautifulSoup(fhand.text)
-tags = soup('a')
-for tag in tags:
-    print tag.get('href')
+# import BeautifulSoup
+# import requests
+# url = raw_input('enter your url:')
+# fhand = requests.get(url)
+# soup =BeautifulSoup.BeautifulSoup(fhand.text)
+# tags = soup('a')
+# for tag in tags:
+#     print tag.get('href')
 # ----------------------------------
 # import requests
 # from bs4 import BeautifulSoup
@@ -48,4 +48,39 @@ for tag in tags:
 # tags = soup('a')
 # for tag in tags:
 #     print tag.get('href',None)
+# -----------------------------
+# import xml.etree.ElementTree as ET
+# data = '''<person>
+# <name>chuck</name>
+# <phone> type = "intl">
+#  +1 734 303 4456
+# </phone>
+# <email hide="yes"/>
+# </person>'''
+# tree = ET.fromstring(data)
+# print('name:',tree.find('name').text)
+# print('Attr:',tree.find('email').get('hide'))
+# --------------------------------------------------
+import xml.etree.ElementTree as ET
+input = '''<stuff>
+    <users>
+        <user x="2">
+            <id>001</id>
+            <name>chuck</name>
+        </user>
+        <user x="7">
+            <id>009</id>
+            <name>brent</name>
+        </user>
+    </users>
+</stuff>'''
+stuff =ET.fromstring(input)
+lst = stuff.findall('users/user')
+print('user count:',len(lst))
+for item in lst:
+    print('name:',item.find('name').text)
+    print('id',item.find('id').text)
+    print('attribut:',item.get("x"))
+
+
 
